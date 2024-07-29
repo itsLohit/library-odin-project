@@ -6,8 +6,11 @@ const dialog = document.querySelector("#addBookDialog");
 const dialogCaption = document.querySelector(".dialog-caption");
 const containerMain = document.querySelector(".containerMain");
 const cardsContainer = document.querySelector(".cards-container");
+const dialogBtns = document.querySelector(".dialog-buttons-edit");
 
-
+document.addEventListener("DOMContentLoaded", function(){
+  dialog.close();
+});
 
 
 
@@ -43,12 +46,7 @@ function addBookToLibrary(book) {
 }
 
 
-window.addEventListener("keydown", e=>{
-  const key = e.key;
-  if(key === "Escape"){
-    resetInputs();
-  }
-})
+
 
 
 
@@ -112,7 +110,7 @@ function createBookCards(book){
   bookPages.textContent = book.pages;
 
   const readStatusLabel = document.createElement("div");
-  pagesLabel.classList.add("card-label");
+  readStatusLabel.classList.add("card-label");
   readStatusLabel.textContent = "Status:";
   container.appendChild(readStatusLabel);
   const bookReadStatus = document.createElement("button");
@@ -196,7 +194,7 @@ function editBookDialog(book){
   const editButton = document.createElement("button");
   editButton.textContent = "Edit";
   editButton.classList.add("edit-button");
-  dialog.appendChild(editButton);
+  dialogBtns.appendChild(editButton);
   editButton.addEventListener("click", ()=>{
     editBook(book);
     editButton.remove();
@@ -205,12 +203,12 @@ function editBookDialog(book){
     submitBtn.hidden = false;
     cancelBtn.hidden = false;
     resetInputs();
-  })
+  });
 
   const discardChangesButton = document.createElement("button");
   discardChangesButton.textContent = "Discard";
   discardChangesButton.classList.add("discard-button");
-  dialog.appendChild(discardChangesButton);
+  dialogBtns.appendChild(discardChangesButton);
   discardChangesButton.addEventListener("click", ()=>{
     editButton.remove();
     discardChangesButton.remove();
@@ -218,7 +216,17 @@ function editBookDialog(book){
     submitBtn.hidden = false;
     cancelBtn.hidden = false;
     resetInputs();
-  })
+  });
+
+  window.addEventListener("keydown", e=>{
+    const key = e.key;
+    if(key === "Escape"){
+      resetInputs();
+      editButton.remove();
+      discardChangesButton.remove();
+    }
+  });
+  
 }
 
 
@@ -238,7 +246,9 @@ function resetInputs(){
   document.getElementById("title").value = "";
   document.getElementById("author").value = "";
   document.getElementById("pages").value = "";
-  document.getElementById("readStatus").value = "";
+  document.getElementById("readStatus").value = "Not Selected";
+  submitBtn.hidden = false;
+  cancelBtn.hidden = false;
 }
 
 
