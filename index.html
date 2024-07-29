@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <h1>Library</h1>
+    <div class="containerMain">
+        <dialog id="addBookDialog">
+            <h1 class="dialog-caption"></h1>
+            <form action="" method="post" id="bookForm" name="addBook">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author">
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" name="pages">
+                <label for="readStatus">Status</label>
+                <select name="readStatus" id="readStatus">
+                    <option value="Not Selected" selected>Select</option>
+                    <option value="Read">Read</option>
+                    <option value="Not Read">Not Read</option>
+                </select>
+                <button type="submit" id="submitBtn">Add</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+            </form>
+        </dialog>
+        <button class="addBookBtn">Add New Book</button>
+        <div class="cards-container"></div>
+    </div>
+</body>
+</html>
